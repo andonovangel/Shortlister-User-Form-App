@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -23,4 +25,9 @@ class User extends Authenticatable
         'phone',
         'date_of_birth',
     ];
+
+    public function getAge(): int
+    {
+        return Carbon::parse($this->date_of_birth)->age;
+    }
 }

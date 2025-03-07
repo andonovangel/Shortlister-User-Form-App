@@ -26,11 +26,4 @@ class FindAllUsersRequest extends FormRequest
             'page' => ['integer'],
         ];
     }
-
-    public function prepareForValidation()
-    {
-        $this->merge([
-            'per_page' => $this->per_page ?? 10,
-        ]);
-    }
 }

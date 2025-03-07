@@ -6,13 +6,21 @@ use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\FindAllUsersRequest;
 use App\Models\User;
 use App\Repositories\Interfaces\IUserRepository;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Collection;
 
 class UserRepository implements IUserRepository
 {
-    public function all(FindAllUsersRequest $request): array
+    public function all(FindAllUsersRequest $request): array|Collection
     {
-        return User::paginate($request->per_page)->items();
+        if ($request->has('per_page')) {
+            return User::paginate($request->per_page)->items();
+        }
+        return User::all();
+    }
+
+    public function find(int $id): User
+    {
+        return User::findOrFail($id);
     }
 
     public function usersLenght(): int {

@@ -28,6 +28,19 @@ class UserController extends Controller
         return response()->json($userDto, 200);
     }
 
+    public function show(int $id): JsonResponse
+    {
+        $user = $this->userService->find($id);
+        $userDto = new UserDto(
+            $user->full_name,
+            $user->email,
+            $user->phone,
+            $user->getAge()
+        );
+
+        return response()->json($userDto, 200);
+    }
+
     public function usersLenght(): int
     {
         return $this->userService->usersLenght();

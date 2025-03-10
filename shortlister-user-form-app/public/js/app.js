@@ -14,38 +14,40 @@ $(document).ready(function() {
                     </tr>
                 `);
             });
-
-            updateUrl(page, perPage);
-
-            $.get('api/users/count', function(totalUsers) {
-                loadPagination(totalUsers);
-            });
-
-            updateActivePage(page);
         });
-    }
 
-    $('#per-page').on('change', function() {
-        let perPage = $(this).val();
-        fetchUsers(1, perPage);
-    });
+        updateUrl(page, perPage);
+
+        $.get('api/users/count', function(totalUsers) {
+            loadPagination(totalUsers);
+        });
+
+        updateActivePage(page);
+    }
 
     let currentPage = getCurrentPage();
     let perPage = getPerPage();
 
     fetchUsers(currentPage, perPage);
 
+    $('#per-page').on('change', function() {
+        let perPage = $(this).val();
+        fetchUsers(1, perPage);
+    });
+
     $('#user-form').submit(function(e) {
         e.preventDefault();
 
         let full_name  = $('#full_name').val();
         let email  = $('#email').val();
+        let phone  = $('#phone').val();
         let date_of_birth  = $('#date_of_birth').val();
 
         if (full_name && email && date_of_birth) {
-            $.post('api/users', { full_name, email, date_of_birth}, function() {
+            $.post('api/users', { full_name, email, phone, date_of_birth}, function() {
                 $('#full_name').val('');
                 $('#email').val('');
+                $('#phone').val('');
                 $('#date_of_birth').val('');
 
                 $('.error-message').hide();

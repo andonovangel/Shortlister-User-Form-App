@@ -48,7 +48,7 @@ $(document).on('click', '#prev-page', function (e) {
 
 $(document).on('click', '#next-page', function (e) {
     let currentPage = getCurrentPage();
-    $.get('api/users/length', function (totalUsers) {
+    $.get('api/users/count', function (totalUsers) {
         let totalPages = Math.ceil(totalUsers / getPerPage());
         if (currentPage < totalPages) {
             fetchUsers(currentPage + 1, getPerPage());

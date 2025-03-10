@@ -17,7 +17,7 @@ $(document).ready(function() {
 
             updateUrl(page, perPage);
 
-            $.get('api/users/length', function (totalUsers) {
+            $.get('api/users/count', function (totalUsers) {
                 loadPagination(totalUsers);
             });
 

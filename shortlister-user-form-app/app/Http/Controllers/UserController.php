@@ -41,11 +41,6 @@ class UserController extends Controller
         return response()->json($userDto, 200);
     }
 
-    public function usersLenght(): int
-    {
-        return $this->userService->usersLenght();
-    }
-
     public function store(CreateUserRequest $request): JsonResponse
     {
         $user = $this->userService->create($request);
@@ -57,5 +52,10 @@ class UserController extends Controller
         );
 
         return response()->json($userDto, 201);
+    }
+
+    public function userCount(): int
+    {
+        return $this->userService->userCount();
     }
 }

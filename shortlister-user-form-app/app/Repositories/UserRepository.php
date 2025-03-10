@@ -23,12 +23,12 @@ class UserRepository implements IUserRepository
         return User::findOrFail($id);
     }
 
-    public function usersLenght(): int {
-        return User::count();
-    }
-
     public function create(CreateUserRequest $request): User
     {
         return User::create($request->all());
+    }
+
+    public function userCount(): int {
+        return User::count();
     }
 }

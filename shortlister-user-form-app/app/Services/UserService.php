@@ -22,13 +22,13 @@ class UserService
         return $this->userRepository->find($id);
     }
 
-    public function usersLenght(): int
-    {
-        return $this->userRepository->usersLenght();
-    }
-
     public function create(CreateUserRequest $request): User
     {
         return $this->userRepository->create($request);
+    }
+
+    public function userCount(): int
+    {
+        return $this->userRepository->userCount();
     }
 }

@@ -11,6 +11,6 @@ interface IUserRepository
 {
     public function all(FindAllUsersRequest $request): array|Collection;
     public function find(int $id): User;
-    public function usersLenght(): int;
     public function create(CreateUserRequest $request): User;
+    public function userCount(): int;
 }

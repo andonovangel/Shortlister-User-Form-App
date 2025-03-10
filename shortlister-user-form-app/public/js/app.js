@@ -17,7 +17,7 @@ $(document).ready(function() {
 
             updateUrl(page, perPage);
 
-            $.get('api/users/count', function (totalUsers) {
+            $.get('api/users/count', function(totalUsers) {
                 loadPagination(totalUsers);
             });
 
@@ -25,7 +25,7 @@ $(document).ready(function() {
         });
     }
 
-    $('#per-page').on('change', function () {
+    $('#per-page').on('change', function() {
         let perPage = $(this).val();
         fetchUsers(1, perPage);
     });
@@ -43,18 +43,33 @@ $(document).ready(function() {
         let date_of_birth  = $('#date_of_birth').val();
 
         if (full_name && email && date_of_birth) {
-            $.post('api/users', { full_name, email, date_of_birth}, function (user) {
-                $('#user-table-body').append(`
-                    <tr>
-                        <td>${user.full_name}</td>
-                        <td><a class="link" href="mailto:someone@example.com">${user.email}</a></td>
-                        <td>${user.age}</td>
-                    </tr>
-                `);
+            $.post('api/users', { full_name, email, date_of_birth}, function() {
                 $('#full_name').val('');
                 $('#email').val('');
                 $('#date_of_birth').val('');
+
+                $('.error-message').hide();
+
+                fetchUsers(currentPage, perPage);
+            })
+            .fail(function(error) {
+                $('.error-message').hide();
+
+                let errors = error.responseJSON.errors;
+                for (let field in errors) {
+                    $('#' + field + '-error').show();
+                }
             });
+        } else {
+            if (!full_name) {
+                $('#name-required-error').show();
+            }
+            if (!email) {
+                $('#email-required-error').show();
+            }
+            if (!date_of_birth) {
+                $('#date-required-error').show();
+            }
         }
     });
 });

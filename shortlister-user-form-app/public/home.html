@@ -15,16 +15,20 @@
             <h2>User Form</h2>
             <form id="user-form">
                 <label for="full_name">Full Name:</label>
-                <input type="text" id="full_name" required />
+                <input type="text" id="full_name" />
+                <p class="error-message" id="name-required-error">This field is required</p>
 
                 <label for="email">Email:</label>
-                <input type="email" id="email" required />
+                <input type="email" id="email" />
+                <p class="error-message" id="email-required-error">This field is required</p>
+                <p class="error-message" id="email-error">This email is already taken</p>
 
                 <label for="phone">Phone:</label>
                 <input type="phone" id="phone" />
 
                 <label for="date_of_birth">Date of Birth:</label>
-                <input type="date" id="date_of_birth" required />
+                <input type="date" id="date_of_birth" />
+                <p class="error-message" id="date-required-error">This field is required</p>
 
                 <button type="submit">Add User</button>
             </form>

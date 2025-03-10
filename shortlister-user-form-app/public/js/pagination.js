@@ -34,21 +34,21 @@ function loadPagination(totalUsers) {
     }
 }
 
-$(document).on('click', '.page-number', function (e) {
+$(document).on('click', '.page-number', function() {
     let page = $(this).data('page');
     fetchUsers(page, getPerPage());
 });
 
-$(document).on('click', '#prev-page', function (e) {
+$(document).on('click', '#prev-page', function() {
     let currentPage = getCurrentPage();
     if (currentPage > 1) {
         fetchUsers(currentPage - 1, getPerPage());
     }
 });
 
-$(document).on('click', '#next-page', function (e) {
+$(document).on('click', '#next-page', function() {
     let currentPage = getCurrentPage();
-    $.get('api/users/count', function (totalUsers) {
+    $.get('api/users/count', function(totalUsers) {
         let totalPages = Math.ceil(totalUsers / getPerPage());
         if (currentPage < totalPages) {
             fetchUsers(currentPage + 1, getPerPage());
